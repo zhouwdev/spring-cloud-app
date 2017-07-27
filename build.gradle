@@ -1,0 +1,68 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.2.RELEASE'
+    }
+
+    repositories {
+        mavenCentral()
+        maven {
+            url 'http://10.52.2.106:8081/repository/maven-public/'
+        }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+allprojects {
+
+    group 'springcloud'
+//    version '2.0'
+
+    apply plugin: 'java'
+    apply plugin: 'maven'
+
+    sourceCompatibility = 1.8
+
+    [compileJava, compileTestJava]*.options*.encoding = "UTF-8"
+
+    repositories {
+        mavenCentral()
+        maven { url "http://10.52.2.106:8081/repository/maven-public/" }
+    }
+
+    ext {
+        logback_version = "1.1.1"
+        beanutils_version = "1.8.3"
+        collections_version = "3.2.1"
+        aspectjweaver_version = "1.7.1"
+        asm_version = "3.1"
+        cglib_version = "2.2"
+        jxls_core_version = "1.0.6"
+    }
+
+    dependencies {
+        compile(
+                "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
+                "org.springframework.boot:spring-boot-starter-data-redis:${springBootVersion}",
+                "org.slf4j:slf4j-api",
+                "org.slf4j:jcl-over-slf4j",
+                "commons-beanutils:commons-beanutils:${beanutils_version}",
+                "commons-collections:commons-collections:${collections_version}",
+                "org.aspectj:aspectjweaver:${aspectjweaver_version}",
+                "asm:asm:${asm_version}",
+                "cglib:cglib:${cglib_version}",
+                "net.sf.jxls:jxls-core:${jxls_core_version}"
+        )
+
+        testCompile(
+                "junit:junit:4.12",
+                "org.gmock:gmock:0.8.3",
+                "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+        )
+    }
+}
+
+
+

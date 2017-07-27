@@ -1,0 +1,39 @@
+server:
+  port: 7011
+  tomcat:
+    basedir: /work/project/demo/v1/tmp/
+spring:
+  application:
+    name: service-a
+    version: 1.0
+
+ #http: #上传文件大小
+ #  multipart:
+ #    maxFileSize: 5Mb
+ #    maxRequestSize: 10Mb
+ #    resolveLazily: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:7013/eureka/
+  instance:
+    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 10
+      queueSizeRejectionThreshold: 10
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            #熔断超时时间
+            timeoutInMilliseconds: 8000
+logging:
+  level:
+    com.spring.cloud.app.Hello: debug
+

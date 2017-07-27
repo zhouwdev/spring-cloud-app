@@ -1,0 +1,32 @@
+server:
+  port: 7012
+  tomcat:
+    basedir: /work/project/demo/v1/tmp/
+spring:
+  application:
+    name: route-server
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:7013/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 5
+
+
+zuul:
+  routes:
+    api-a-url:
+      path: /v1/**
+      serviceId: service-a
+  sensitive-headers: Cookie
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000

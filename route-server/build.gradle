@@ -1,0 +1,18 @@
+project(':route-server') {
+
+    apply plugin: 'org.springframework.boot'
+
+    dependencyManagement {
+        imports {
+            mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Camden.SR5'
+        }
+    }
+
+    dependencies {
+        compile (
+                "org.springframework.boot:spring-boot-starter-actuator",
+                "org.springframework.cloud:spring-cloud-starter-eureka",
+                "org.springframework.cloud:spring-cloud-starter-zuul",
+        )
+    }
+}

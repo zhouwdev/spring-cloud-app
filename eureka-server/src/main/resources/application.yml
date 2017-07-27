@@ -1,0 +1,24 @@
+server:
+  port: 7013
+  tomcat:
+    basedir: /work/project/demo/v1/tmp/
+
+spring:
+  application:
+    name: cloud-eureka-server
+
+eureka:
+  server:
+    enableSelfPreservation: false
+    #每隔XX毫秒就把响应给客户端的实例列表更新一次，设置为0时无法启动
+    responseCacheUpdateIntervalMs: 5000
+    #每隔XX毫就把注册状态为DOWN的实例清除掉，设置为0时这个线程就不工作了
+    evictionIntervalTimerInMs: 10000
+  instance:
+    hostname: 127.0.0.1
+    prefer-ip-address: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

@@ -1,0 +1,32 @@
+project(':service-a') {
+
+    apply plugin: 'org.springframework.boot'
+
+    dependencyManagement {
+        imports {
+            mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Camden.SR5'
+        }
+    }
+    ext{
+        swagger_version = "2.5.0"
+        fastjson_version="1.2.14"
+    }
+    dependencies {
+        compile (
+                "org.springframework.boot:spring-boot-starter-actuator",
+                "org.springframework.cloud:spring-cloud-starter-eureka",
+                "org.springframework.cloud:spring-cloud-starter-hystrix",
+                "org.springframework.cloud:spring-cloud-starter-hystrix-dashboard",
+                "org.springframework.cloud:spring-cloud-starter-feign",
+
+                "org.springframework.cloud:spring-cloud-starter-zuul",
+                "org.springframework.boot:spring-boot-starter-web",
+                "io.springfox:springfox-swagger-ui:${swagger_version}",
+                "io.springfox:springfox-swagger2:${swagger_version}",
+                //"org.springframework.session:spring-session",
+                //"org.springframework.boot:spring-boot-starter-security"
+        )
+
+    }
+}
+
